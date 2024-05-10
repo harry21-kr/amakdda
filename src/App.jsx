@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import Header from "./components/Header";
 import Input from "./components/Input";
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
   }
 
   return (
-    <main style={{ maxWidth: 1220, display: "flex", flexDirection: "column" }}>
+    <>
+      <Header />
       <h1>Todo List</h1>
       <Input value={title} onChange={setTitle} placeholder="제목" />
       <Input value={detail} onChange={setDetail} placeholder="내용" />
@@ -69,7 +71,7 @@ function App() {
           );
         })}
       </section>
-    </main>
+    </>
   );
 }
 
