@@ -1,4 +1,4 @@
-const Input = ({ value, placeholder, onChange }) => {
+const Input = ({ value, placeholder, onChange, width }) => {
   return (
     <input
       type="text"
@@ -6,7 +6,7 @@ const Input = ({ value, placeholder, onChange }) => {
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
       style={{
-        width: 160,
+        width: width ?? 160,
         height: 36,
         paddingLeft: 8,
         border: "none",

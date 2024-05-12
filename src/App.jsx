@@ -83,7 +83,12 @@ function App() {
             style={{ display: "flex", justifyContent: "center", gap: 24 }}
           >
             <Input value={title} onChange={setTitle} placeholder="제목" />
-            <Input value={detail} onChange={setDetail} placeholder="내용" />
+            <Input
+              value={detail}
+              onChange={setDetail}
+              placeholder="내용"
+              width={500}
+            />
             <Button value="추가" onClick={addWorkingList} color="#FDFD96" />
           </section>
           <section style={{ height: 320 }}>
