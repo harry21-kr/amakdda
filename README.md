@@ -1,8 +1,33 @@
-# React + Vite
+# 내일배움캠프 리액트 5기 개인 프로젝트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Todo list
 
-Currently, two official plugins are available:
+### 디렉토리 구조
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+┣ 📂 public
+┃ ┗ 📜 vite.svg
+┣ 📂 src
+┃ ┣ 📂 assets
+┃ ┃ ┗ 📜 react.svg
+┃ ┣ 📂 components
+┃ ┃ ┣ 📜 Button.jsx
+┃ ┃ ┣ 📜 Header.jsx
+┃ ┃ ┣ 📜 Input.jsx
+┃ ┃ ┗ 📜 ListBox.jsx
+┃ ┣ 📂 css
+┃ ┃ ┣ 📜 font.css
+┃ ┃ ┗ 📜 reset.css
+┃ ┣ 📜 App.jsx
+┃ ┗ 📜 main.jsx
+┣ 📜 .eslintrc.cjs
+┣ 📜 .gitignore
+┣ 📜 index.html
+┣ 📜 package.json
+┣ 📜 README.md
+┣ 📜 vite.config.js
+┗ 📜 yarn.lock
+```
+
+### 컴포넌트
+
