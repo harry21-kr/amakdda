@@ -98,7 +98,9 @@ function App() {
             <Button value="추가" onClick={addTodo} color="#FDFD96" />
           </section>
           <section style={{ height: 320 }}>
-            <h2 style={{ fontSize: 32, textAlign: "center" }}>진행중인 목록</h2>
+            <h2 style={{ fontSize: 32, paddingLeft: 12 }}>
+              진행중인 목록 ( {list.filter((v) => !v.isDone).length}개 )
+            </h2>
             <div
               style={{
                 display: "flex",
@@ -111,8 +113,8 @@ function App() {
                 return (
                   !isDone && (
                     <ListBox key={id}>
-                      <h3 style={{ fontSize: 24 }}>{title}</h3>
-                      <p>{detail}</p>
+                      <h3 style={{ fontSize: 28 }}>{title}</h3>
+                      <p style={{ fontSize: 18 }}>{detail}</p>
                       <div style={{ display: "flex", gap: 12 }}>
                         <Button
                           value="완료"
@@ -132,7 +134,9 @@ function App() {
             </div>
           </section>
           <section style={{ height: 320 }}>
-            <h2 style={{ fontSize: 32, textAlign: "center" }}>완료 목록</h2>
+            <h2 style={{ fontSize: 32, paddingLeft: 12 }}>
+              완료 목록 ( {list.filter((v) => v.isDone).length}개 )
+            </h2>
             <div
               style={{
                 display: "flex",
@@ -146,8 +150,8 @@ function App() {
                 return (
                   isDone && (
                     <ListBox key={id}>
-                      <h3 style={{ fontSize: 24 }}>{title}</h3>
-                      <p>{detail}</p>
+                      <h3 style={{ fontSize: 28 }}>{title}</h3>
+                      <p style={{ fontSize: 18 }}>{detail}</p>
                       <div style={{ display: "flex", gap: 12 }}>
                         <Button
                           value="되돌리기"
