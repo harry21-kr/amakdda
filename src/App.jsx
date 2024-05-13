@@ -5,53 +5,55 @@ import Input from "./components/Input";
 import ListBox from "./components/ListBox";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
-  const [workingList, setWorkingList] = useState([]);
-  const [completedList, setCompletedList] = useState([]);
+  const [todo, setTodo] = useState({
+    id: 0,
+    title: "",
+    detail: "",
+    isDone: false,
+  });
+  const [list, setList] = useState([]);
 
-  function addWorkingList() {
-    const isDuplicatedList =
-      workingList.find((v) => v.title === title) ||
-      completedList.find((v) => v.title === title);
-    if (!title || !detail || isDuplicatedList) {
+  function handleChangeTitle(newTitle) {
+    setTodo((prevTodo) => {
+      return { ...prevTodo, title: newTitle };
+    });
+  }
+
+  function handleChangeDetail(newDetail) {
+    setTodo((prevTodo) => {
+      return { ...prevTodo, detail: newDetail };
+    });
+  }
+
+  function addTodo() {
+    const { title, detail } = todo;
+    const isDuplicatedTitle = list.find((prevList) => prevList.title === title);
+
+    if (!title || !detail || isDuplicatedTitle) {
       return;
     }
 
-    setWorkingList((prevList) => [
-      ...prevList,
-      { title: title, detail: detail },
-    ]);
-    setTitle("");
-    setDetail("");
+    setList((prevList) => [...prevList, { ...todo, id: Date.now() }]);
+    setTodo({
+      id: 0,
+      title: "",
+      detail: "",
+      isDone: false,
+    });
   }
 
-  function addCompletedList(idx) {
-    const targetList = workingList.find((_, prevIdx) => prevIdx === idx);
-    setWorkingList((prevList) =>
-      prevList.filter((_, prevIdx) => prevIdx !== idx)
-    );
-    setCompletedList((prevList) => [...prevList, targetList]);
+  function deleteTodo(id) {
+    setList((prevList) => [...prevList.filter((v) => v.id !== id)]);
   }
 
-  function deleteList(idx, type) {
-    if (type === "working") {
-      setWorkingList((prevList) =>
-        prevList.filter((_, prevIdx) => prevIdx !== idx)
-      );
-    } else {
-      setCompletedList((prevList) =>
-        prevList.filter((_, prevIdx) => prevIdx !== idx)
-      );
-    }
-  }
-
-  function revertList(idx) {
-    const targetList = completedList.find((_, prevIdx) => prevIdx === idx);
-    setCompletedList((prevList) =>
-      prevList.filter((_, prevIdx) => prevIdx !== idx)
-    );
-    setWorkingList((prevList) => [...prevList, targetList]);
+  function handleChangeTodoStatus(id) {
+    const targetList = list.find((v) => v.id === id);
+    setList((prevList) => {
+      return [
+        ...prevList.filter((v) => v.id !== id),
+        { ...targetList, isDone: !targetList.isDone },
+      ];
+    });
   }
 
   return (
@@ -82,14 +84,18 @@ function App() {
           <section
             style={{ display: "flex", justifyContent: "center", gap: 24 }}
           >
-            <Input value={title} onChange={setTitle} placeholder="제목" />
             <Input
-              value={detail}
-              onChange={setDetail}
+              value={todo.title}
+              onChange={handleChangeTitle}
+              placeholder="제목"
+            />
+            <Input
+              value={todo.detail}
+              onChange={handleChangeDetail}
               placeholder="내용"
               width={500}
             />
-            <Button value="추가" onClick={addWorkingList} color="#FDFD96" />
+            <Button value="추가" onClick={addTodo} color="#FDFD96" />
           </section>
           <section style={{ height: 320 }}>
             <h2 style={{ fontSize: 32, textAlign: "center" }}>진행중인 목록</h2>
@@ -102,24 +108,26 @@ function App() {
                 overflowX: "auto",
               }}
             >
-              {workingList.map(({ title, detail }, idx) => {
+              {list.map(({ id, title, detail, isDone }) => {
                 return (
-                  <ListBox key={title}>
-                    <h3 style={{ fontSize: 24 }}>{title}</h3>
-                    <p>{detail}</p>
-                    <div style={{ display: "flex", gap: 12 }}>
-                      <Button
-                        value="완료"
-                        onClick={() => addCompletedList(idx)}
-                        color="#C1E1C1"
-                      />
-                      <Button
-                        value="삭제하기"
-                        onClick={() => deleteList(idx, "working")}
-                        color="#FAA0A0"
-                      />
-                    </div>
-                  </ListBox>
+                  !isDone && (
+                    <ListBox key={id}>
+                      <h3 style={{ fontSize: 24 }}>{title}</h3>
+                      <p>{detail}</p>
+                      <div style={{ display: "flex", gap: 12 }}>
+                        <Button
+                          value="완료"
+                          onClick={() => handleChangeTodoStatus(id)}
+                          color="#C1E1C1"
+                        />
+                        <Button
+                          value="삭제하기"
+                          onClick={() => deleteTodo(id)}
+                          color="#FAA0A0"
+                        />
+                      </div>
+                    </ListBox>
+                  )
                 );
               })}
             </div>
@@ -135,19 +143,21 @@ function App() {
                 overflowX: "auto",
               }}
             >
-              {completedList.map(({ title, detail }, idx) => {
+              {list.map(({ id, title, detail, isDone }) => {
                 return (
-                  <ListBox key={title}>
-                    <h3 style={{ fontSize: 24 }}>{title}</h3>
-                    <p>{detail}</p>
-                    <div style={{ display: "flex", gap: 12 }}>
-                      <Button
-                        value="되돌리기"
-                        onClick={() => revertList(idx)}
-                        color="#FAA0A0"
-                      />
-                    </div>
-                  </ListBox>
+                  isDone && (
+                    <ListBox key={id}>
+                      <h3 style={{ fontSize: 24 }}>{title}</h3>
+                      <p>{detail}</p>
+                      <div style={{ display: "flex", gap: 12 }}>
+                        <Button
+                          value="되돌리기"
+                          onClick={() => handleChangeTodoStatus(id)}
+                          color="#FAA0A0"
+                        />
+                      </div>
+                    </ListBox>
+                  )
                 );
               })}
             </div>
