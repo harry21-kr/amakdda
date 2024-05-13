@@ -104,8 +104,7 @@ function App() {
                 display: "flex",
                 gap: 36,
                 padding: "24px 16px 24px 16px",
-                whiteSpace: "nowrap",
-                overflowX: "auto",
+                overflowX: "scroll",
               }}
             >
               {list.map(({ id, title, detail, isDone }) => {

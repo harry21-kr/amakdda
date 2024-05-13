@@ -2,11 +2,11 @@ const ListBox = ({ children }) => {
   return (
     <div
       style={{
-        maxWidth: 320,
-        width: "100%",
+        width: 320,
         height: 200,
         borderRadius: 12,
         display: "flex",
+        flexShrink: 0,
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
