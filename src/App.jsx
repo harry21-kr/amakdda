@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import TodoForm from "./components/todo/TodoForm";
-import ListSection from "./components/todo/list/ListSection";
+import TodoList from "./components/todo/todoList/TodoList";
 
 function App() {
-  const [list, setList] = useState([]);
+  const [todoList, setTodoList] = useState([]);
 
   return (
     <main
@@ -31,9 +31,9 @@ function App() {
             paddingTop: 40,
           }}
         >
-          <TodoForm setList={setList} />
-          <ListSection workingList list={list} setList={setList} />
-          <ListSection doneList list={list} setList={setList} />
+          <TodoForm setTodoList={setTodoList} />
+          <TodoList workingList todoList={todoList} setTodoList={setTodoList} />
+          <TodoList doneList todoList={todoList} setTodoList={setTodoList} />
         </div>
       </div>
     </main>

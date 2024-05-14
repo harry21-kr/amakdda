@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 
-const TodoForm = ({ setList }) => {
+const TodoForm = ({ setTodoList }) => {
   const [todo, setTodo] = useState({
     id: 0,
     title: "",
@@ -29,7 +29,7 @@ const TodoForm = ({ setList }) => {
       return;
     }
 
-    setList((prevList) => [...prevList, { ...todo, id: Date.now() }]);
+    setTodoList((prevList) => [...prevList, { ...todo, id: Date.now() }]);
     setTodo({
       id: 0,
       title: "",

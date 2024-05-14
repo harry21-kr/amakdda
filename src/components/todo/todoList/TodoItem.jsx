@@ -1,15 +1,15 @@
 import Button from "../../ui/Button";
 
-const ListBox = ({ todo, list, setList }) => {
+const TodoItem = ({ todo, todoList, setTodoList }) => {
   const { id, title, detail, isDone } = todo;
 
   function handleDeleteTodo(id) {
-    setList((prevList) => [...prevList.filter((v) => v.id !== id)]);
+    setTodoList((prevList) => [...prevList.filter((v) => v.id !== id)]);
   }
 
   function handleChangeTodoStatus(id) {
-    const targetList = list.find((v) => v.id === id);
-    setList((prevList) => {
+    const targetList = todoList.find((v) => v.id === id);
+    setTodoList((prevList) => {
       return [
         ...prevList.filter((v) => v.id !== id),
         { ...targetList, isDone: !targetList.isDone },
@@ -62,4 +62,4 @@ const ListBox = ({ todo, list, setList }) => {
   );
 };
 
-export default ListBox;
+export default TodoItem;
