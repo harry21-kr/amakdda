@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Button from "./components/Button";
 import Header from "./components/Header";
-import Input from "./components/Input";
-import ListBox from "./components/ListBox";
+import ListSection from "./components/list/ListSection";
+import Button from "./components/ui/Button";
+import Input from "./components/ui/Input";
 
 function App() {
   const [todo, setTodo] = useState({
@@ -39,20 +39,6 @@ function App() {
       title: "",
       detail: "",
       isDone: false,
-    });
-  }
-
-  function deleteTodo(id) {
-    setList((prevList) => [...prevList.filter((v) => v.id !== id)]);
-  }
-
-  function handleChangeTodoStatus(id) {
-    const targetList = list.find((v) => v.id === id);
-    setList((prevList) => {
-      return [
-        ...prevList.filter((v) => v.id !== id),
-        { ...targetList, isDone: !targetList.isDone },
-      ];
     });
   }
 
@@ -97,74 +83,8 @@ function App() {
             />
             <Button value="추가" onClick={addTodo} color="#FDFD96" />
           </section>
-          <section style={{ height: 320 }}>
-            <h2 style={{ fontSize: 32, paddingLeft: 12 }}>
-              진행중인 목록 ( {list.filter((v) => !v.isDone).length}개 )
-            </h2>
-            <div
-              style={{
-                display: "flex",
-                gap: 36,
-                padding: "24px 16px 24px 16px",
-                overflowX: "scroll",
-              }}
-            >
-              {list.map(({ id, title, detail, isDone }) => {
-                return (
-                  !isDone && (
-                    <ListBox key={id}>
-                      <h3 style={{ fontSize: 28 }}>{title}</h3>
-                      <p style={{ fontSize: 18 }}>{detail}</p>
-                      <div style={{ display: "flex", gap: 12 }}>
-                        <Button
-                          value="완료"
-                          onClick={() => handleChangeTodoStatus(id)}
-                          color="#C1E1C1"
-                        />
-                        <Button
-                          value="삭제하기"
-                          onClick={() => deleteTodo(id)}
-                          color="#FAA0A0"
-                        />
-                      </div>
-                    </ListBox>
-                  )
-                );
-              })}
-            </div>
-          </section>
-          <section style={{ height: 320 }}>
-            <h2 style={{ fontSize: 32, paddingLeft: 12 }}>
-              완료 목록 ( {list.filter((v) => v.isDone).length}개 )
-            </h2>
-            <div
-              style={{
-                display: "flex",
-                gap: 36,
-                padding: "24px 16px 24px 16px",
-                whiteSpace: "nowrap",
-                overflowX: "auto",
-              }}
-            >
-              {list.map(({ id, title, detail, isDone }) => {
-                return (
-                  isDone && (
-                    <ListBox key={id}>
-                      <h3 style={{ fontSize: 28 }}>{title}</h3>
-                      <p style={{ fontSize: 18 }}>{detail}</p>
-                      <div style={{ display: "flex", gap: 12 }}>
-                        <Button
-                          value="되돌리기"
-                          onClick={() => handleChangeTodoStatus(id)}
-                          color="#FAA0A0"
-                        />
-                      </div>
-                    </ListBox>
-                  )
-                );
-              })}
-            </div>
-          </section>
+          <ListSection workingList list={list} setList={setList} />
+          <ListSection doneList list={list} setList={setList} />
         </div>
       </div>
     </main>
