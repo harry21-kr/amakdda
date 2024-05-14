@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
 
 const TodoForm = ({ setList }) => {
   const [todo, setTodo] = useState({
@@ -22,7 +22,7 @@ const TodoForm = ({ setList }) => {
     });
   }
 
-  function addTodo() {
+  function handleAddTodo() {
     const { title, detail } = todo;
 
     if (!title || !detail) {
@@ -50,7 +50,7 @@ const TodoForm = ({ setList }) => {
         placeholder="내용"
         width={500}
       />
-      <Button value="추가" onClick={addTodo} color="#FDFD96" />
+      <Button value="추가" onClick={handleAddTodo} color="#FDFD96" />
     </section>
   );
 };

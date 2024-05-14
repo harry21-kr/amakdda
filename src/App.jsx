@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
-import TodoForm from "./components/TodoForm";
-import ListSection from "./components/list/ListSection";
+import TodoForm from "./components/todo/TodoForm";
+import ListSection from "./components/todo/list/ListSection";
 
 function App() {
   const [list, setList] = useState([]);

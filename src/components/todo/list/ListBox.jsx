@@ -1,9 +1,9 @@
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 const ListBox = ({ todo, list, setList }) => {
   const { id, title, detail, isDone } = todo;
 
-  function deleteTodo(id) {
+  function handleDeleteTodo(id) {
     setList((prevList) => [...prevList.filter((v) => v.id !== id)]);
   }
 
@@ -52,7 +52,7 @@ const ListBox = ({ todo, list, setList }) => {
             />
             <Button
               value="삭제하기"
-              onClick={() => deleteTodo(id)}
+              onClick={() => handleDeleteTodo(id)}
               color="#FAA0A0"
             />
           </>
