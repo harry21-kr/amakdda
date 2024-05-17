@@ -1,7 +1,7 @@
-const Button = ({ value, onClick, disabled = false, color }) => {
+const Button = ({ type, value, onClick, disabled = false, color }) => {
   return (
     <button
-      type="button"
+      type={type ?? "button"}
       onClick={onClick}
       disabled={disabled}
       style={{

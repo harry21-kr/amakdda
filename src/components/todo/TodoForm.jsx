@@ -22,7 +22,8 @@ const TodoForm = ({ setTodoList }) => {
     });
   }
 
-  function handleAddTodo() {
+  function handleAddTodo(e) {
+    e.preventDefault();
     const { title, detail } = todo;
 
     if (!title || !detail) {
@@ -38,7 +39,7 @@ const TodoForm = ({ setTodoList }) => {
     });
   }
   return (
-    <section style={{ display: "flex", justifyContent: "center", gap: 24 }}>
+    <form style={{ display: "flex", justifyContent: "center", gap: 24 }}>
       <Input
         value={todo.title}
         onChange={handleChangeTitle}
@@ -50,8 +51,13 @@ const TodoForm = ({ setTodoList }) => {
         placeholder="내용"
         width={500}
       />
-      <Button value="추가" onClick={handleAddTodo} color="#FDFD96" />
-    </section>
+      <Button
+        type="submit"
+        value="추가"
+        onClick={(e) => handleAddTodo(e)}
+        color="#FDFD96"
+      />
+    </form>
   );
 };
 
