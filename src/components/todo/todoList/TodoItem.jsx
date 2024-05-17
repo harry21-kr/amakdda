@@ -8,12 +8,11 @@ const TodoItem = ({ todo, todoList, setTodoList }) => {
   }
 
   function handleChangeTodoStatus(id) {
-    const targetList = todoList.find((v) => v.id === id);
+    const targetIdx = todoList.findIndex((v) => v.id === id);
     setTodoList((prevList) => {
-      return [
-        ...prevList.filter((v) => v.id !== id),
-        { ...targetList, isDone: !targetList.isDone },
-      ];
+      return prevList.map((todo, idx) =>
+        idx === targetIdx ? { ...todo, isDone: !todo.isDone } : todo
+      );
     });
   }
 
